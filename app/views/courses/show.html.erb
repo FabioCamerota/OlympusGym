@@ -1,0 +1,35 @@
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+
+<h1> <%= @course.nome %> </h1>
+
+<h2> Course Details </h2>
+
+<p>Nome: <%= @course.nome %></p>
+
+<p>Giorno: <%= @course.giorno %></p>
+
+<p>Orario: <%= @course.orario %></p>
+
+<p>Durata: <%= @course.durata %></p>
+
+<p>Descrizione: <%= @course.descrizione %></p>
+
+<hr>
+
+<h2> Other Actions </h2>
+
+<ul>
+
+<li><%= link_to "Edit", edit_course_path(@course.id) %></li>
+<li><%= link_to "Destroy", course_path(@course.id), method: :delete,
+                  data: { confirm: "Are you sure?" } %></li>
+
+<li>
+	<%= link_to "Back Course List", courses_path %>
+</li>
+</ul>

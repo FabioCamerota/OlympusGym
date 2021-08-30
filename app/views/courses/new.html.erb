@@ -1,0 +1,32 @@
+<h1>Add a New Course</h1>
+
+<%= form_with model: @course do |form| %>
+  <div>
+    <%= form.label :nome %><br>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div>
+    <%= form.label :giorno %><br>
+    <%= form.text_field :giorno %>
+  </div>
+
+  <div>
+    <%= form.label :orario %><br>
+    <%= form.text_field :orario %>
+  </div>
+
+  <div>
+    <%= form.label :durata %><br>
+    <%= form.text_field :durata %>
+  </div>
+
+  <div>
+    <%= form.label :descrizione %><br>
+    <%= form.text_area :descrizione %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

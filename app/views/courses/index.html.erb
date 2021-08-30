@@ -1,0 +1,44 @@
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<h1>Courses List</h1>
+
+
+ <table style="width:100%">
+  <tr>
+    <th>Nome</th>
+    <th>Giorno</th>
+    <th>Ora</th>
+    <th>Durata</th>
+    <th>Azioni</th>
+  </tr>
+
+  <% @courses.each do |course| %>
+  <tr>
+    <td><%= course.nome %></td>
+    <td><%= course.giorno %></td>
+    <td><%= course.orario %></td>
+    <td><%= course.durata %></td>
+    <td><table style="width:100%">
+    	<td><%= link_to "Edit", edit_course_path(course.id) %></td>
+		<td><%= link_to "Destroy", course_path(course.id), method: :delete,
+                  data: { confirm: "Are you sure?" } %></td>
+    	<td><%= link_to "Details", course_path(course.id) %></td>
+  		</table>
+	</td>
+  </tr>
+  <% end %> 
+ 
+</table> 
+
+<hr>
+
+<h2> Actions </h2>
+
+<ul>
+
+<li><%= link_to "Add A New Course", new_course_path %></li>
+</ul>
