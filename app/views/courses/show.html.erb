@@ -20,6 +20,51 @@ table, th, td {
 <p>Descrizione: <%= @course.descrizione %></p>
 
 <hr>
+<h2> Reviews </h2>
+
+<% if @course.reviews.empty? %>
+ <h3> No reviews yet! </h3>
+<% end %>
+
+<%@course.reviews.each do |review| %>
+	<p>
+		<bf>Comments: </bf><%= review.comments %> <br>
+		<bf>Stelle: </bf><%= review.stelle %> <br>
+	 <bf>Author: </bf><%= link_to review.user.email, user_reviews_path(review.user)  %> <br>
+  </p>
+
+	<p>
+  	<ul>
+  	<li> <%= link_to "Edit Review", edit_course_review_path(review.course, review)  %></li>
+  	<li><%= link_to 'Delete Review', [review.course, review],
+              method: :delete,
+              data: { confirm: "Are you sure?" } %>
+	</li>
+	</ul>
+
+<% end %>
+
+<hr>
+
+<h2> Add a Review </h2>
+
+<%= form_with model: [ @course, @course.reviews.build ] do |form| %>
+  <p>
+    <%= form.label :comments %><br>
+    <%= form.text_area :comments %>
+  </p>
+  <p>
+    <%= form.label :stelle %><br>
+    <%= form.collection_select :stelle, [1,2,3,4,5,6,7,8,9,10], :to_i, :to_s%>
+  </p>
+
+  <p>
+  	
+    <%= form.submit "Save Review" %>
+  </p>
+<% end %>
+
+<hr>
 
 <h2> Other Actions </h2>
 
@@ -28,7 +73,7 @@ table, th, td {
 <li><%= link_to "Edit", edit_course_path(@course.id) %></li>
 <li><%= link_to "Destroy", course_path(@course.id), method: :delete,
                   data: { confirm: "Are you sure?" } %></li>
-
+<li><%= link_to "Reviews", course_path(@course.id) %></li>
 <li>
 	<%= link_to "Back Course List", courses_path %>
 </li>

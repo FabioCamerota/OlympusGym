@@ -1,0 +1,17 @@
+<h2> Edit a Review </h2>
+
+<%= form_with model: [ @review.course, @review ] do |form| %>
+  <p>
+    <%= form.label :comments %><br>
+    <%= form.text_area :comments %>
+  </p>
+  <p>
+    <%= form.label :stelle %><br>
+    <%= form.collection_select :stelle, [1,2,3,4,5,6,7,8,9,10], :to_i, :to_s%>
+  </p>
+
+  <p>
+  	
+    <%= form.submit "Save Review" %>
+  </p>
+<% end %>
