@@ -1,6 +1,4 @@
 class CoursesController < ApplicationController
-    #Ricordati di cancellare la seguente riga
-    skip_before_action :verify_authenticity_token
 
     def index
         @courses = Course.all
@@ -16,14 +14,12 @@ class CoursesController < ApplicationController
     end
 
     def create
-        params.require(:course)
-        nome = params[:course].require(:nome)
-        orario = params[:course].require(:orario)
-        giorno = params[:course].require(:giorno)
-        durata = params[:course].require(:durata)
-        descrizione = params[:course].require(:descrizione)
-        Course.create!(:nome => nome, :orario => orario, :giorno => giorno, :durata => durata, :descrizione => descrizione)
-        redirect_to courses_path
+        @course = Course.new(course_params)
+        if @course.save
+            redirect_to courses_path
+        else
+            render html: 'Course not created'
+        end
     end
 
     def new
@@ -40,4 +36,32 @@ class CoursesController < ApplicationController
             render html: 'Course does not exist'
         end
     end
+
+    def edit
+        @course = Course.find(params[:id])
+    end
+
+    def update
+        @course = Course.find(params[:id])
+        if @course.update(course_params)
+            redirect_to courses_path
+        else
+            render html: 'Course does not exist'
+        end
+    end
+    
+    private
+    def course_params
+        #vedi https://stackoverflow.com/questions/22487878/strong-parameters-require-multiple
+        # for check require params
+        #params.require(:course)
+        #nome = params[:course].require(:nome)
+        #orario = params[:course].require(:orario)
+        #giorno = params[:course].require(:giorno)
+        #durata = params[:course].require(:durata)
+        #descrizione = params[:course].require(:descrizione)
+        # for using where hash needed
+        params.require(:course).permit(:nome, :orario, :giorno, :durata, :descrizione)
+    end
+
 end
