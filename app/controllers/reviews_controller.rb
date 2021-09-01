@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
   end
 
   def update
+    authorize! :update, Review, message: "You are not authorized!"
     @review = Course.find(params[:course_id]).reviews.find(params[:id])
     if @review.update(review_params)
       redirect_to @review.course
@@ -14,12 +15,14 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    authorize! :create, Review, message: "You are not authorized!"
     @course = Course.find(params[:course_id])
     @review = @course.reviews.create(review_params)
     redirect_to course_path(@course)
   end
 
   def destroy
+    authorize! :destroy, Review, message: "You are not authorized!"
     @course = Course.find(params[:course_id])
     @review = @course.reviews.find(params[:id])
     @review.destroy

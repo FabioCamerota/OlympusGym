@@ -15,6 +15,18 @@
     <% if user_signed_in? %>
       Logged in as <%= current_user.email%> [<%= link_to 'Logout', destroy_user_session_path, :method => :delete%>]
     <% end %>
+
+    <% if not current_user.nil? %> 
+        <hr>
+        <b>Roles : </b> 
+        <% if current_user.is_gymClient? %>
+            gymClient
+        <%end %>
+        <% if current_user.is_admin? %>
+            <%= link_to "Admin", admin_view_path %>
+        <%end %>
+    <% end  %>
+
     <% if not flash.empty? %> 
       <hr>
       <h3>Notifications:</h3>

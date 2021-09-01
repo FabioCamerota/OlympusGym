@@ -7,6 +7,8 @@ class User < ApplicationRecord
 
   has_many :reviews
 
+  acts_as_user :roles => [:gymClient, :admin]
+
    def self.from_omniauth(access_token)
     	data = access_token.info
 
@@ -18,5 +20,40 @@ class User < ApplicationRecord
 	         )
 	     end
 		  user
-	  end
+   end
+
+ def is_admin?
+    return (self.roles_mask & 2) == 2
+  end
+
+ def set_admin
+    self.roles_mask = (self.roles_mask | 2) 
+    self.save
+  end
+
+def unset_admin
+    self.roles_mask = (self.roles_mask & 1) 
+    self.save
+  end
+
+
+ def is_gymClient?
+  	return (self.roles_mask & 1) == 1
+  end
+
+
+ def is_banned?
+    return self.roles_mask  == 0
+  end
+
+ def set_gymClient
+  	self.roles_mask = (self.roles_mask | 1) 
+  	self.save
+  end
+
+ def unset_gymClient
+	 self.roles_mask = 0 
+	 self.save
+  end
+
 end

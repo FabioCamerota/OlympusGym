@@ -27,6 +27,7 @@ gem 'jbuilder', '~> 2.7'
 
 #Autorizzazione
 gem 'devise'
+gem 'canard', '~> 0.6.2.pre'
 gem 'omniauth-google-oauth2'
 gem 'omniauth', '~>1.9.1'
 

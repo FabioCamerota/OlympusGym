@@ -23,9 +23,19 @@ table, th, td {
     <td><%= course.orario %></td>
     <td><%= course.durata %></td>
     <td><table style="width:100%">
+
+    <% if can? :update, Course %>
     	<td><%= link_to "Edit", edit_course_path(course.id) %></td>
+    <% else %>
+    <td>Edit</td>
+    <% end %>
+
+    <% if can? :destroy, Course %>
 		<td><%= link_to "Destroy", course_path(course.id), method: :delete,
                   data: { confirm: "Are you sure?" } %></td>
+    <% else %> 
+    <td>Destroy</td>
+    <% end %>
     	<td><%= link_to "Details", course_path(course.id) %></td>
   		</table>
 	</td>

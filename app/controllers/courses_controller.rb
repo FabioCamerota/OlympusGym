@@ -15,6 +15,7 @@ class CoursesController < ApplicationController
     end
 
     def create
+        authorize! :create, Course, message: "You are not authorized!"
         @course = Course.new(course_params)
         if @course.save
             redirect_to courses_path
@@ -28,6 +29,7 @@ class CoursesController < ApplicationController
     end
 
     def destroy
+        authorize! :destroy, Course, message: "You are not authorized!"
         id = params[:id]
         if Course.exists?(id)
             @course = Course.find(id)
@@ -43,6 +45,7 @@ class CoursesController < ApplicationController
     end
 
     def update
+        authorize! :update, Course, message: "You are not authorized!"
         @course = Course.find(params[:id])
         if @course.update(course_params)
             redirect_to courses_path
