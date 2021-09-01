@@ -1,0 +1,33 @@
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<h1>Lista dei corsi a cui sono prenotato</h1>
+
+
+ <table style="width:100%">
+  <tr>
+    <th>Nome</th>
+    <th>Giorno</th>
+    <th>Orario</th>
+    <th>Durata</th>
+    <th>Descrizione</th>
+  </tr>
+
+  <% @courses.each do |course| %>
+  <tr>
+    <td><%= course.nome %></td>
+    <td><%= course.giorno %></td>
+    <td><%= course.orario %></td>
+    <td><%= course.durata %></td>
+    <td><%= course.descrizione %></td>
+  </tr>
+  <% end %> 
+ 
+</table>
+<br>
+<%= link_to "Back Course List", courses_path %>
+<br>
+<br>
