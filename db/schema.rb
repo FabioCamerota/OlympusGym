@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_01_070324) do
+ActiveRecord::Schema.define(version: 2021_09_01_144629) do
 
   create_table "courses", force: :cascade do |t|
     t.string "nome"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2021_09_01_070324) do
     t.text "descrizione"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reservations", force: :cascade do |t|
+    t.integer "prenotato"
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["course_id"], name: "index_reservations_on_course_id"
+    t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
 # Could not dump table "reviews" because of following StandardError
@@ -40,5 +50,7 @@ ActiveRecord::Schema.define(version: 2021_09_01_070324) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reservations", "courses"
+  add_foreign_key "reservations", "users"
   add_foreign_key "reviews", "courses"
 end

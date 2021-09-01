@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' , registrations:
     "users/registrations"}
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "courses#index"
   resources :courses do
     resources :reviews
+    #secondo me è buono mettere only
+    resources :reservations
   end
   
   get '/users/reviews/:id', to: 'reviews#user_reviews', :as => :user_reviews
+  get '/users/reservations/:id', to: 'reservations#user_reservations', :as => :user_reservations
 
   #Admin Actions
   get '/adm', to: 'admins#index', :as => :admin_view

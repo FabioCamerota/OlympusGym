@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :reviews
+  has_many :reservations
 
   acts_as_user :roles => [:gymClient, :admin]
 

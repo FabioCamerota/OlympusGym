@@ -36,6 +36,14 @@ table, th, td {
     <% else %> 
     <td>Destroy</td>
     <% end %>
+      <% if Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).exists?%>
+            <% reservation = Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).first %>
+          <td><%= link_to "Cancella prenotazione", [reservation.course, reservation], method: :delete,
+                      data: { confirm: "Are you sure?" }  %></td>
+      <% else %>
+          <td><%= link_to "Prenotami", course_reservations_path(course.id), method: :post,
+                      data: { confirm: "Are you sure?" }  %></td>
+      <% end %>
     	<td><%= link_to "Details", course_path(course.id) %></td>
   		</table>
 	</td>
@@ -51,4 +59,5 @@ table, th, td {
 <ul>
 
 <li><%= link_to "Add New Course", new_course_path %></li>
+<li><%= link_to "Mostra tutte le mie prenotazioni", popularcourses_index_path %></li>
 </ul>
