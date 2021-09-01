@@ -1,3 +1,14 @@
+<h1>Olympus Gym</h1>
+<h2>Comunicazioni:</h2>
+<h2>Corsi offerti dalla palestra:</h2>
+<ul>
+  <% courses = Course.all %>
+  <% courses.each do |course| %>
+    <li><%= course.nome %></li>
+  <% end %>
+</ul>
+<h2>Contatti:</h2>
+<hr>
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
