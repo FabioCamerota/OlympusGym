@@ -1,0 +1,33 @@
+<style>
+table, th, td {
+  border: 1px solid black;
+}
+</style>
+
+<h1>Comunicazioni:</h1>
+
+
+ <table style="width:100%">
+  <tr>
+    <th>Descrizione</th>
+    <th>Azioni</th>
+  </tr>
+
+  <% @comunications.each do |comunication| %>
+  <tr>
+    <td><%= comunication.description %></td>
+		<td><%= link_to "Elimina comunicazione", comunication_path(comunication.id), method: :delete,
+                  data: { confirm: "Are you sure?" } %></td>
+  </tr>
+  <% end %> 
+ 
+</table> 
+
+<hr>
+
+<h2> Azioni </h2>
+
+<ul>
+  <li><%= link_to "Crea nuova comunicazione", new_comunication_path %></li>
+  <li><%= link_to "Back Course Lista", courses_path %></li>
+</ul>

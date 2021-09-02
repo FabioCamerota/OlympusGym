@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     #secondo me è buono mettere only
     resources :reservations
   end
+  resources :comunications
   
   get '/users/reviews/:id', to: 'reviews#user_reviews', :as => :user_reviews
   get '/users/reservations/:id', to: 'reservations#user_reservations', :as => :user_reservations
