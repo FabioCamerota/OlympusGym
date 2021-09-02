@@ -7,7 +7,7 @@ table, th, td {
 
 <h1> <%= @course.nome %> </h1>
 
-<h2> Course Details </h2>
+<h2> Dettagli del corso </h2>
 
 <p>Nome: <%= @course.nome %></p>
 
@@ -35,10 +35,15 @@ table, th, td {
 
 	<p>
   	<ul>
-  	<li> <%= link_to "Edit Review", edit_course_review_path(review.course, review)  %></li>
-  	<li><%= link_to 'Delete Review', [review.course, review],
-              method: :delete,
-              data: { confirm: "Are you sure?" } %>
+    <% if review.user_id == current_user.id || current_user.is_admin?%>
+        <li> <%= link_to "Edit Review", edit_course_review_path(review.course, review)  %></li>
+        <li><%= link_to 'Delete Review', [review.course, review],
+                  method: :delete,
+                  data: { confirm: "Are you sure?" } %>
+    <% else %> 
+        <li>Edit Review</li>
+        <li>Delete Review</li>
+    <% end %> 
 	</li>
 	</ul>
 
@@ -69,11 +74,6 @@ table, th, td {
 <h2> Other Actions </h2>
 
 <ul>
-
-<li><%= link_to "Edit", edit_course_path(@course.id) %></li>
-<li><%= link_to "Destroy", course_path(@course.id), method: :delete,
-                  data: { confirm: "Are you sure?" } %></li>
-<li><%= link_to "Reviews", course_path(@course.id) %></li>
 <li>
 	<%= link_to "Back Course List", courses_path %>
 </li>

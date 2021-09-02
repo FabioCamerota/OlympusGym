@@ -4,7 +4,7 @@ table, th, td {
 }
 </style>
 
-<h1>Courses List</h1>
+<h1>Lista dei corsi</h1>
 
 
  <table style="width:100%">
@@ -25,16 +25,16 @@ table, th, td {
     <td><table style="width:100%">
 
     <% if can? :update, Course %>
-    	<td><%= link_to "Edit", edit_course_path(course.id) %></td>
+    	<td><%= link_to "Modifica corso", edit_course_path(course.id) %></td>
     <% else %>
-    <td>Edit</td>
+    <td>Modifica corso</td>
     <% end %>
 
     <% if can? :destroy, Course %>
-		<td><%= link_to "Destroy", course_path(course.id), method: :delete,
+		<td><%= link_to "Elimina corso", course_path(course.id), method: :delete,
                   data: { confirm: "Are you sure?" } %></td>
     <% else %> 
-    <td>Destroy</td>
+    <td>Elimina corso</td>
     <% end %>
       <% if Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).exists?%>
             <% reservation = Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).first %>
@@ -54,10 +54,13 @@ table, th, td {
 
 <hr>
 
-<h2> Actions </h2>
+<h2> Azioni </h2>
 
 <ul>
-
-<li><%= link_to "Add New Course", new_course_path %></li>
+<% if can? :create, Course %>
+  <li><%= link_to "Crea nuovo corso", new_course_path %></li>
+<% else %> 
+  <li>Crea nuovo corso</li>
+<% end %> 
 <li><%= link_to "Mostra tutte le mie prenotazioni", myreservations_index_path %></li>
 </ul>
