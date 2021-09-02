@@ -1,7 +1,8 @@
-Feature: User can manually add a course
+Feature: Admins can manually add a course
 Scenario: Add a course
+    Given I am authenticated as Admin
     Given I am on OlympusGym homepage
-    When I follow "Add New Course"
+    When I follow "Crea nuovo corso"
     Then I should be on the Create New Course Page
     When I fill in "Nome" with "Funzionale"
     And I press "Create Course"
