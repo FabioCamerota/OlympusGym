@@ -41,7 +41,7 @@ Then('I should be on the Reservations Page') do
 end
 
 Then('I should see {string}') do |string|
-    assert page.has_content?(string)
+    expect(page).to have_content(string)
 end
 
 When('I fill in {string} with {string}') do |field, value|
