@@ -1,0 +1,8 @@
+<h1> Il mio profilo </h1>
+<p> <b>Email:</b> <%= @user.email %> </p>
+<p> <b>Nome:</b> <%= @user.nome %> </p>
+<p> <b>Cognome:</b> <%= @user.cognome %> </p>
+<p> <b>Cellulare:</b> <%= @user.cellulare %> </p>
+<p> <b>Età:</b> <%= @user.eta %> </p>
+<li><%= link_to 'Modifica profilo', edit_user_registration_path %></li>
+<br><br>

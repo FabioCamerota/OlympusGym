@@ -65,4 +65,5 @@ table, th, td {
 <li><%= link_to "Vedi comunicazioni", comunications_path %></li>
 
 <li><%= link_to "Mostra tutte le mie prenotazioni", myreservations_index_path %></li>
+<li><%= link_to 'Il mio Profilo', myprofiles_show_path(current_user.id) %></li>
 </ul>
