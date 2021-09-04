@@ -4,15 +4,7 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-krav_maga:
- nome: 'Krav Maga'
- giorno: '01/01/1970'
- orario: '12:00'
- durata: '1:30'
- descrizione: 'Corso di difesa personale'
- #created_at:
- #updated_at:
-
+#one: {}
 # column: value
 #
 #two: {}

@@ -5,7 +5,7 @@ class ComunicationsController < ApplicationController
     end
 
     def create
-        #authorize! :create, Course, message: "You are not authorized!"
+        authorize! :create, Comunication, message: "You are not authorized!"
         @comunication = Comunication.new(comunication_params)
         if @comunication.save
             redirect_to comunications_path
@@ -19,7 +19,7 @@ class ComunicationsController < ApplicationController
     end
 
     def destroy
-        #authorize! :destroy, Course, message: "You are not authorized!"
+        authorize! :destroy, Comunication, message: "You are not authorized!"
         id = params[:id]
         if Comunication.exists?(id)
             @comunication = Comunication.find(id)
