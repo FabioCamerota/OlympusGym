@@ -26,3 +26,12 @@ user:
  roles_mask: 1
 
 # column: value
+
+banned:
+ email: 'fixture_banned@olympus.com'
+ #password: 'test_password'
+ nome: 'Bannato'
+ cognome: 'Fixture'
+ cellulare: '00000000000'
+ eta: 60
+ roles_mask: 0
