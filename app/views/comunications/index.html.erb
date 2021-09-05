@@ -10,14 +10,18 @@ table, th, td {
  <table style="width:100%">
   <tr>
     <th>Descrizione</th>
-    <th>Azioni</th>
+    <% if can? :destroy, Comunication %>
+      <th>Azioni</th>
+    <% end %>
   </tr>
 
   <% @comunications.each do |comunication| %>
   <tr>
     <td><%= comunication.description %></td>
-		<td><%= link_to "Elimina comunicazione", comunication_path(comunication.id), method: :delete,
-                  data: { confirm: "Are you sure?" } %></td>
+    <% if can? :destroy, Comunication %>
+		  <td><%= link_to "Elimina comunicazione", comunication_path(comunication.id), method: :delete,
+                   data: { confirm: "Are you sure?" } %></td>
+    <% end %>
   </tr>
   <% end %> 
  
