@@ -4,6 +4,7 @@ table, th, td {
 }
 </style>
 
+<% if current_user.is_admin? || current_user.is_gymClient? %>
 
 <h1> <%= @course.nome %> </h1>
 
@@ -20,61 +21,65 @@ table, th, td {
 <p>Descrizione: <%= @course.descrizione %></p>
 
 <hr>
-<h2> Reviews </h2>
+<h2> Recensioni </h2>
 
 <% if @course.reviews.empty? %>
- <h3> No reviews yet! </h3>
+ <h3> Ancora nessuna recensione! </h3>
 <% end %>
 
 <%@course.reviews.each do |review| %>
 	<p>
-		<bf>Comments: </bf><%= review.comments %> <br>
+		<bf>Commenti: </bf><%= review.comments %> <br>
 		<bf>Stelle: </bf><%= review.stelle %> <br>
-	 <bf>Author: </bf><%= link_to review.user.email, user_reviews_path(review.user)  %> <br>
+	 <bf>Autore: </bf><%= link_to review.user.email, user_reviews_path(review.user)  %> <br>
   </p>
 
 	<p>
   	<ul>
     <% if review.user_id == current_user.id || current_user.is_admin?%>
-        <li> <%= link_to "Edit Review", edit_course_review_path(review.course, review)  %></li>
-        <li><%= link_to 'Delete Review', [review.course, review],
+        <li> <%= link_to "Modifica recensione", edit_course_review_path(review.course, review)  %></li>
+        <li><%= link_to 'Cancella recensione', [review.course, review],
                   method: :delete,
-                  data: { confirm: "Are you sure?" } %>
-    <% else %> 
-        <li>Edit Review</li>
-        <li>Delete Review</li>
+                  data: { confirm: "Sei sicuro?" } %>
     <% end %> 
 	</li>
 	</ul>
 
 <% end %>
 
-<hr>
-
-<h2> Add a Review </h2>
-
-<%= form_with model: [ @course, @course.reviews.build ] do |form| %>
-  <p>
-    <%= form.label :comments %><br>
-    <%= form.text_area :comments %>
-  </p>
-  <p>
-    <%= form.label :stelle %><br>
-    <%= form.collection_select :stelle, [1,2,3,4,5,6,7,8,9,10], :to_i, :to_s%>
-  </p>
-
-  <p>
-  	
-    <%= form.submit "Save Review" %>
-  </p>
-<% end %>
 
 <hr>
+
+  <h2> Aggiungi recensione </h2>
+
+  <%= form_with model: [ @course, @course.reviews.build ] do |form| %>
+    <p>
+      <%= form.label :comments %><br>
+      <%= form.text_area :comments %>
+    </p>
+    <p>
+      <%= form.label :stelle %><br>
+      <%= form.collection_select :stelle, [1,2,3,4,5,6,7,8,9,10], :to_i, :to_s%>
+    </p>
+
+    <p>
+    	
+      <%= form.submit "Salva recensione" %>
+    </p>
+
+    <% end %>
+<hr>
+
 
 <h2> Other Actions </h2>
 
 <ul>
 <li>
-	<%= link_to "Back Course List", courses_path %>
+	<%= link_to "Torna ai corsi", courses_path %>
 </li>
 </ul>
+
+
+<% else %>
+<h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<% end %>

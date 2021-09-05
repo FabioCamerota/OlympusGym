@@ -4,7 +4,9 @@ table, th, td {
 }
 </style>
 
-<h1>Lista dei corsi a cui sono prenotato</h1>
+<% if current_user.is_admin? || current_user.is_gymClient? %>
+
+<h1>Lista dei corsi a cui sei prenotato</h1>
 
 
  <table style="width:100%">
@@ -28,6 +30,11 @@ table, th, td {
  
 </table>
 <br>
-<%= link_to "Back Course List", courses_path %>
+<%= link_to "Torna ai corsi", courses_path %>
 <br>
 <br>
+
+
+<% else %>
+<h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<% end %>

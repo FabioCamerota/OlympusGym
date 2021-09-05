@@ -7,7 +7,7 @@ Scenario: An Admin posts a comunication and then deletes it
 	Then I follow "Crea nuova comunicazione"
 	And I should be on the Create Comunication Page
 	Then I fill in "Description" with "Comunicazione di prova"
-	And I press "Create Comunication"
+	And I press "Crea comunicazione"
 	Then I should be on the Comunications Page
 	And I should see "Comunicazione di prova"
 	And I should see "Elimina comunicazione"

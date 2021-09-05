@@ -5,6 +5,6 @@ Scenario: Add a course
     When I follow "Crea nuovo corso"
     Then I should be on the Create New Course Page
     When I fill in "Nome" with "Funzionale"
-    And I press "Create Course"
+    And I press "Crea corso"
     Then I should be on the OlympusGym homepage
     And I should see "Funzionale"

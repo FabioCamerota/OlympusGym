@@ -24,8 +24,25 @@ Given('I am authenticated as Admin') do
     expect(page).to have_text("Logged in as test_admin@olympus.com")
 end
 
+Given('I am authenticated as a Banned User') do
+    admin = User.create!(:id => 0, :email => "test_banned@olympus.com", :password => "test_password", :nome => "Bannato",
+        :cognome => "Prova", :cellulare => "0000000000", :eta => 60, :roles_mask => 0)
+    visit "/users/sign_in"
+    fill_in "Email", with: "test_banned@olympus.com"
+    fill_in "Password", with: "test_password"
+
+    #AGGIUNGERE I FUTURI CAMPI DEL SIGN IN
+
+    click_button "Log in"
+    expect(page).to have_text("Logged in as test_banned@olympus.com")
+end
+
 Given('I am on OlympusGym homepage') do
     visit 'courses'
+end
+
+Then('I visit {string}') do |string|
+    visit string
 end
 
 When('I follow {string}') do |string|

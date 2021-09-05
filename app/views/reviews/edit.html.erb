@@ -1,4 +1,6 @@
-<h2> Edit a Review </h2>
+<% if current_user.is_admin? || current_user.is_gymClient? %>
+
+<h2> Modifica recensione </h2>
 
 <%= form_with model: [ @review.course, @review ] do |form| %>
   <p>
@@ -12,6 +14,11 @@
 
   <p>
   	
-    <%= form.submit "Save Review" %>
+    <%= form.submit "Salva" %>
   </p>
+<% end %>
+
+
+<% else %>
+<h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
 <% end %>

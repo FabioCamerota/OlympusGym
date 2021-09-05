@@ -1,3 +1,5 @@
+<% if current_user.is_admin? || current_user.is_gymClient? %>
+
 <h1> Il mio profilo </h1>
 <p> <b>Email:</b> <%= @user.email %> </p>
 <p> <b>Nome:</b> <%= @user.nome %> </p>
@@ -5,4 +7,9 @@
 <p> <b>Cellulare:</b> <%= @user.cellulare %> </p>
 <p> <b>Età:</b> <%= @user.eta %> </p>
 <li><%= link_to 'Modifica profilo', edit_user_registration_path %></li>
+<li><%= link_to "Torna ai corsi", courses_path %></li>
 <br><br>
+
+<% else %>
+<h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<% end %>

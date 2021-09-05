@@ -9,7 +9,7 @@ Scenario: User edits own profile
 	When I fill in "Nome" with "Mario"
 	When I fill in "Cognome" with "Rossi"
 	When I fill in "Cellulare" with "3330000001"
-	And I press "Update"
+	And I press "Aggiorna profilo"
 	Then I should be on the OlympusGym homepage
 	And I follow "Il mio Profilo"
 	Then I should be on the Profile Page

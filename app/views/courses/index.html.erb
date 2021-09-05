@@ -4,6 +4,8 @@ table, th, td {
 }
 </style>
 
+<% if current_user.is_admin? || current_user.is_gymClient? %>
+
 <h1>Lista dei corsi</h1>
 
 
@@ -26,25 +28,21 @@ table, th, td {
 
     <% if can? :update, Course %>
     	<td><%= link_to "Modifica corso", edit_course_path(course.id) %></td>
-    <% else %>
-    <td>Modifica corso</td>
     <% end %>
 
     <% if can? :destroy, Course %>
 		<td><%= link_to "Elimina corso", course_path(course.id), method: :delete,
-                  data: { confirm: "Are you sure?" } %></td>
-    <% else %> 
-    <td>Elimina corso</td>
+                  data: { confirm: "Sei sicuro di voler eliminare il corso di "+course.nome+"?" } %></td>
     <% end %>
       <% if Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).exists?%>
             <% reservation = Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).first %>
           <td><%= link_to "Cancella prenotazione", [reservation.course, reservation], method: :delete,
-                      data: { confirm: "Are you sure?" }  %></td>
+                      data: { confirm: "Vuoi cancellare la tua prenotazione al corso di "+course.nome+"?" }  %></td>
       <% else %>
           <td><%= link_to "Prenotami", course_reservations_path(course.id), method: :post,
-                      data: { confirm: "Are you sure?" }  %></td>
+                      data: { confirm: "Vuoi prenotarti al corso di "+course.nome+"?" }  %></td>
       <% end %>
-    	<td><%= link_to "Details", course_path(course.id) %></td>
+    	<td><%= link_to "Dettagli", course_path(course.id) %></td>
   		</table>
 	</td>
   </tr>
@@ -59,11 +57,13 @@ table, th, td {
 <ul>
 <% if can? :create, Course %>
   <li><%= link_to "Crea nuovo corso", new_course_path %></li>
-<% else %> 
-  <li>Crea nuovo corso</li>
 <% end %> 
 <li><%= link_to "Vedi comunicazioni", comunications_path %></li>
 
 <li><%= link_to "Mostra tutte le mie prenotazioni", myreservations_index_path %></li>
 <li><%= link_to 'Il mio Profilo', myprofiles_show_path(current_user.id) %></li>
 </ul>
+
+<% else %>
+  <h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<% end %>

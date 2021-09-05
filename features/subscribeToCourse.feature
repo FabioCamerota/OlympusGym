@@ -9,7 +9,7 @@ Scenario: Subscribe to a course and then unsubscribe
     Then I follow "Mostra tutte le mie prenotazioni"
     And I should be on the Reservations Page
     And I should see "Krav Maga"
-    Then I follow "Back Course List"
+    Then I follow "Torna ai corsi"
     And I should be on the OlympusGym homepage
     Then I follow "Cancella prenotazione"
     Then I should be on the OlympusGym homepage

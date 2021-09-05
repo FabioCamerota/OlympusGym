@@ -1,4 +1,6 @@
-<h1>Add a New Course</h1>
+<% if current_user.is_admin? || current_user.is_gymClient? %>
+
+<h1>Aggiungi un nuovo corso</h1>
 
 <%= form_with model: @course do |form| %>
   <div>
@@ -27,6 +29,9 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Crea corso" %>
   </div>
+<% end %>
+<% else %>
+<h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
 <% end %>

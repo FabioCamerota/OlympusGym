@@ -4,6 +4,8 @@ table, th, td {
 }
 </style>
 
+<% if current_user.is_admin? || current_user.is_gymClient? %>
+
 <h1>Comunicazioni:</h1>
 
 
@@ -20,7 +22,7 @@ table, th, td {
     <td><%= comunication.description %></td>
     <% if can? :destroy, Comunication %>
 		  <td><%= link_to "Elimina comunicazione", comunication_path(comunication.id), method: :delete,
-                   data: { confirm: "Are you sure?" } %></td>
+                   data: { confirm: "Sei sicuro?" } %></td>
     <% end %>
   </tr>
   <% end %> 
@@ -29,9 +31,14 @@ table, th, td {
 
 <hr>
 
-<h2> Azioni </h2>
+<!--- <h2> Azioni </h2> --->
 
 <ul>
+  <% if can? :create, Comunication %>
   <li><%= link_to "Crea nuova comunicazione", new_comunication_path %></li>
-  <li><%= link_to "Back Course Lista", courses_path %></li>
+  <% end %>
+  <li><%= link_to "Torna ai corsi", courses_path %></li>
 </ul>
+<% else %>
+  <h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<% end %>
