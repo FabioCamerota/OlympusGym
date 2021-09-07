@@ -5,6 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 krav_maga:
+ id: 0
  nome: 'Krav Maga'
  giorno: '01/01/1970'
  orario: '12:00'

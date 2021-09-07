@@ -16,9 +16,17 @@ require "capybara/rspec"
 #include Capybara::DSL
 
 RSpec.configure do |config|
+
+	config.expect_with :rspec do |c|
+		c.syntax = :expect
+	end
+
 	config.include Devise::Test::ControllerHelpers, type: :controller
 	config.include Devise::Test::IntegrationHelpers, type: :request
+	config.include Warden::Test::Helpers
 	config.extend ControllerMacros, type: :controller
 	#config.extend ControllerMacros, :type => :controller
 	config.fixture_path = "#{::Rails.root}/test/fixtures"
+
+	config.render_views
 end
