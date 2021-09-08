@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+.text-bold {
+    font-weight: bolder;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.courses-column {
+    min-width: 25%;
+    max-width: 50%;
+}
+
+
+
+body {
+    background-color: white;
+}

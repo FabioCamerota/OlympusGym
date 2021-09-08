@@ -1,68 +1,90 @@
-<style>
+<!-- <style>
 table, th, td {
   border: 1px solid black;
 }
-</style>
+</style> -->
 
 <% if current_user.is_admin? || current_user.is_gymClient? %>
 
-<h1>Lista dei corsi</h1>
+  <br>
 
+  <div class="courses-table container-fluid">
+    <h1 class="text-bold" style="margin-left: 5%;">I nostri corsi</h1>
+    <table style="width:90%" class="table table-hover table-secondary center">
+    <thead class="table-dark">
+      <th>Nome</th>
+      <th>Giorno</th>
+      <th>Orario</th>
+      <th>Durata</th>
+      <th>Azioni</th>
+    </thead>
 
- <table style="width:100%">
-  <tr>
-    <th>Nome</th>
-    <th>Giorno</th>
-    <th>Ora</th>
-    <th>Durata</th>
-    <th>Azioni</th>
-  </tr>
+    <% @courses.each do |course| %>
+    <tr class="">
+      <td><%= course.nome %></td>
+      <td><%= course.giorno %></td>
+      <td><%= course.orario %></td>
+      <td><%= course.durata %></td>
+      <td><table style="width:100%">
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+        
+            <% if can? :update, Course %>
+            <div class="col-3">
+            	<td class="courses-column"><%= link_to("Modifica corso", edit_course_path(course.id), :class => "btn btn-secondary courses-button") %></td>
+            </div>
+            <% end %>
+          
 
-  <% @courses.each do |course| %>
-  <tr>
-    <td><%= course.nome %></td>
-    <td><%= course.giorno %></td>
-    <td><%= course.orario %></td>
-    <td><%= course.durata %></td>
-    <td><table style="width:100%">
+            <% if can? :destroy, Course %>
+            <div class="col-3">
+        		  <td class="courses-column"><%= link_to("Elimina corso", course_path(course.id), :class => "btn btn-secondary courses-button", method: :delete,
+                           data: { confirm: "Sei sicuro di voler eliminare il corso di "+course.nome+"?" }) %></td>
+            </div>
+            <% end %>
+          
 
-    <% if can? :update, Course %>
-    	<td><%= link_to "Modifica corso", edit_course_path(course.id) %></td>
-    <% end %>
+            <% if Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).exists?%>
+                  <% reservation = Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).first %>
+                  <div class="col-3">
+                  <td  class="courses-column"><%= link_to("Cancella prenotazione", [reservation.course, reservation], :class => "btn btn-primary courses-button",method: :delete,
+                            data: { confirm: "Vuoi cancellare la tua prenotazione al corso di "+course.nome+"?" })  %></td>
+                  </div>
+            <% else %>
+                <div class="col-3">
+                <td class="courses-column"><%= link_to("Prenotami", course_reservations_path(course.id), :class => "btn btn-primary courses-button",method: :post,
+                            data: { confirm: "Vuoi prenotarti al corso di "+course.nome+"?" })  %></td>
+                </div>
+            <% end %>
 
-    <% if can? :destroy, Course %>
-		<td><%= link_to "Elimina corso", course_path(course.id), method: :delete,
-                  data: { confirm: "Sei sicuro di voler eliminare il corso di "+course.nome+"?" } %></td>
-    <% end %>
-      <% if Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).exists?%>
-            <% reservation = Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).first %>
-          <td><%= link_to "Cancella prenotazione", [reservation.course, reservation], method: :delete,
-                      data: { confirm: "Vuoi cancellare la tua prenotazione al corso di "+course.nome+"?" }  %></td>
-      <% else %>
-          <td><%= link_to "Prenotami", course_reservations_path(course.id), method: :post,
-                      data: { confirm: "Vuoi prenotarti al corso di "+course.nome+"?" }  %></td>
-      <% end %>
-    	<td><%= link_to "Dettagli", course_path(course.id) %></td>
-  		</table>
-	</td>
-  </tr>
-  <% end %> 
- 
-</table> 
-
+          <div class="col-3">
+         	  <td class="courses-column"><%= link_to("Dettagli", course_path(course.id), :class => "btn btn-primary courses-button") %></td>
+      	  </div>
+        </div>
+      </div>
+      </table>
+    	</td>
+    </tr>
+    <% end %> 
+   
+  </table> 
+</div>
 <hr>
 
-<h2> Azioni </h2>
+<div class="footer" style="margin-left: 5%;">
 
-<ul>
-<% if can? :create, Course %>
-  <li><%= link_to "Crea nuovo corso", new_course_path %></li>
-<% end %> 
-<li><%= link_to "Vedi comunicazioni", comunications_path %></li>
+  <h2 class="text-bold"> Azioni </h2>
 
-<li><%= link_to "Mostra tutte le mie prenotazioni", myreservations_index_path %></li>
-<li><%= link_to 'Il mio Profilo', myprofiles_show_path(current_user.id) %></li>
-</ul>
+  <ul class="actions container-fluid">
+  <% if can? :create, Course %>
+    <li><%= link_to "Crea nuovo corso", new_course_path %></li>
+  <% end %> 
+  <li><%= link_to "Vedi comunicazioni", comunications_path %></li>
+
+  <li><%= link_to "Mostra tutte le mie prenotazioni", myreservations_index_path %></li>
+  <li><%= link_to 'Il mio Profilo', myprofiles_show_path(current_user.id) %></li>
+  </ul>
+</div>
 
 <% else %>
   <h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>

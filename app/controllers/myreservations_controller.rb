@@ -1,4 +1,5 @@
 class MyreservationsController < ApplicationController
+
   #Da qui
   attr_accessor :courses
   def initialize
@@ -11,5 +12,8 @@ class MyreservationsController < ApplicationController
       c = Course.find(reservation.course_id)
       @courses.append(c)
     end
+
+    render layout: "application"
+    
   end
 end
