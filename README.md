@@ -1,24 +1,44 @@
-# README
+# OlympusGym
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+![Git-Banner](/app/assets/images/banner.png)
 
-* Ruby version
 
-* System dependencies
+*Sito web per la gestione e l'iscrizione ai corsi offerti dalla palestra OlympusGym.*
 
-* Configuration
 
-* Database creation
+## Creazione del database e dell'ambiente per il testing:
+	
+1. `$ [bundle exec] rake db:drop:all`
+2. `$ [bundle exec] rake db:create:all`
+3. `$ [bundle exec] rake db:migrate`
+4. `$ [bundle exec] rake db:setup`
 
-* Database initialization
 
-* How to run the test suite
+## Per il testing Cucumber+Capybara:
 
-* Services (job queues, cache servers, search engines, etc.)
+- `$ bundle exec cucumber`
 
-* Deployment instructions
 
-* ...
+## Per il testing RSpec:
+
+- `$ bundle exec rspec [-f d]` 
+
+
+## Per lanciare l'applicazione in locale:
+
+1. `$ rails s`
+2. Visitare `http://localhost:3000`
+
+
+
+
+#### Dettagli:
+
+- Ruby version: 3.0.0
+
+- Rails version: 6.1.3
+
+- Sqlite3 version: 3.31.1
+
+- Yarn version: 1.22.5

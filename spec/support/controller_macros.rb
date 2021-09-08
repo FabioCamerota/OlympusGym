@@ -1,4 +1,6 @@
-module ControllerMacros
+# FILE PER IMPLEMENTAZIONE DI FACTORIES AL POSTO DELLE FIXTURES
+
+#module ControllerMacros
 
 	#def login_admin
 	#	before(:each) do
@@ -16,14 +18,14 @@ module ControllerMacros
 	#	end
 	#end
 
-	def login_as_admin
-		admin = FactoryBot.create(:user)
-		login_as(admin)
-	end
+	#def login_as_admin
+	#	admin = FactoryBot.create(:user)
+	#	login_as(admin)
+	#end
 
-	def login_as(user)
-		sign_in user
-		request.session[:user_id] = user.id
-	end
+	#def login_as(user)
+	#	sign_in user
+	#	request.session[:user_id] = user.id
+	#end
 
-end
+#end

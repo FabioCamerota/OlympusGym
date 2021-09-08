@@ -37,7 +37,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_bot_rails'   #PER RSPEC FIXTURES
+  #gem 'factory_bot_rails'   # GEMMA PER IMPLEMENTAZIONE DI FACTORIES AL POSTO DELLE FIXTURES
 end
 
 group :development do
