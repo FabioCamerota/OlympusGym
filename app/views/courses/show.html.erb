@@ -1,85 +1,141 @@
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
+
 
 <% if current_user.is_admin? || current_user.is_gymClient? %>
 
-<h1> <%= @course.nome %> </h1>
-
-<h2> Dettagli del corso </h2>
-
-<p>Nome: <%= @course.nome %></p>
-
-<p>Giorno: <%= @course.giorno %></p>
-
-<p>Orario: <%= @course.orario %></p>
-
-<p>Durata: <%= @course.durata %></p>
-
-<p>Descrizione: <%= @course.descrizione %></p>
-
-<hr>
-<h2> Recensioni </h2>
-
-<% if @course.reviews.empty? %>
- <h3> Ancora nessuna recensione! </h3>
-<% end %>
-
-<%@course.reviews.each do |review| %>
-	<p>
-		<bf>Commenti: </bf><%= review.comments %> <br>
-		<bf>Stelle: </bf><%= review.stelle %> <br>
-	 <bf>Autore: </bf><%= link_to review.user.email, user_reviews_path(review.user)  %> <br>
-  </p>
-
-	<p>
-  	<ul>
-    <% if review.user_id == current_user.id || current_user.is_admin?%>
-        <li> <%= link_to "Modifica recensione", edit_course_review_path(review.course, review)  %></li>
-        <li><%= link_to 'Cancella recensione', [review.course, review],
-                  method: :delete,
-                  data: { confirm: "Sei sicuro?" } %>
-    <% end %> 
-	</li>
-	</ul>
-
-<% end %>
 
 
+
+<div class="container-fluid">
+
+  <br>
+
+  <div class="course-info">
+
+    <div class="card text-left center" style="max-width: 60%;">
+      <div class="card-header text-bold bg-dark text-white" style="font-size: xx-large;">
+        <%= @course.nome %>
+      </div>
+      <div class="card-body">
+        <h5 class="card-text">Giorno: <%= @course.giorno %></h5>
+        <h5 class="card-text">Orario: <%= @course.orario %></h5>
+        <h5 class="card-text">Durata: <%= @course.durata %></h5>
+        <h5 class="card-text">Descrizione: <%= @course.descrizione %></h5>
+        <% if can? :update, Course %>
+        <%= link_to("Modifica corso", edit_course_path(@course.id), :class => "btn btn-secondary courses-button") %>
+        <% end %>
+        <% if can? :destroy, Course %>
+        <%= link_to("Elimina corso", course_path(@course.id), :class => "btn btn-danger courses-button", method: :delete,
+                           data: { confirm: "Sei sicuro di voler eliminare il corso di "+@course.nome+"?" }) %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+
+<br>
 <hr>
 
-  <h2> Aggiungi recensione </h2>
+<div class="container-flex reviews">
 
-  <%= form_with model: [ @course, @course.reviews.build ] do |form| %>
-    <p>
-      <%= form.label :comments %><br>
-      <%= form.text_area :comments %>
-    </p>
-    <p>
-      <%= form.label :stelle %><br>
-      <%= form.collection_select :stelle, [1,2,3,4,5,6,7,8,9,10], :to_i, :to_s%>
-    </p>
+  <h2 class="text-bold" style="margin-left: 20%;"> Recensioni </h2>
 
-    <p>
-    	
-      <%= form.submit "Salva recensione" %>
-    </p>
+  <br>
 
+  <% if @course.reviews.empty? %>
+   <h3 style="margin-left: 20%;"> Ancora nessuna recensione. Scrivi la prima!</h3>
+  <% end %>
+
+  <div class="container">
+    <div class="row">
+
+    <%@course.reviews.each do |review| %>
+
+  
+      <div class="col-lg-3">
+        <div class="card border-dark mb-3" style="max-width: 20rem;">
+          <div class="card-header">
+            Autore: <% if review.user.nome != nil and review.user.nome != "" %><%= review.user.nome %>
+              <% else %><%= review.user.email %><% end %>
+            </div>
+
+          <div class="card-body text-dark">
+            <h5 class="card-title"><!--Stelle:--> 
+              <% (1..review.stelle).each do |n| %>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+              <% end %>
+            </h5>
+
+
+            <p class="card-text"><%= review.comments %></p>
+
+            <% if review.user_id == current_user.id or current_user.is_admin? %>
+            <%= link_to("Modifica", edit_course_review_path(review.course, review), :class=>"btn btn-secondary") %>
+            <%= link_to("Cancella", [review.course, review],
+                    method: :delete,
+                    data: { confirm: "Vuoi cancellare questa recensione?" }, :class=>"btn btn-danger") %>
+            <% end %>
+
+            <a href=""></a>
+
+          </div>
+        </div>
+      </div>
+
+  
     <% end %>
-<hr>
+
+    </div>
+  </div>
 
 
-<h2> Other Actions </h2>
 
-<ul>
-<li>
-	<%= link_to "Torna ai corsi", courses_path %>
-</li>
-</ul>
+  <hr>
+
+    <!-- <h2 class="text-bold" style="margin-left: 20%;"> Aggiungi una recensione </h2> -->
+
+  <div class="review-form">
+    <br>
+
+    <div class="card text-center center" style="max-width: 60%;">
+      <div class="card-header text-bold" style="font-size: xx-large;">
+        Aggiungi una recensione
+      </div>
+      <div class="card-body">
+
+        <%= form_with model: [ @course, @course.reviews.build ] do |f| %>
+
+          <div class="mb-3">
+            <%= f.label(:comments, "Commento", :class=>"form-label") %><br />
+            <%= f.text_area(:comments, autofocus: true, autocomplete: "Commento", :class=>"form-control center", :style=>"width: 30rem; max-width: 80%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:stelle, "Voto", :class=>"form-label") %><br />
+            <%= f.range_field(:stelle, :class=>"form-range center", :min=>"1",:max=>"10", :style=>"width: 30rem; max-width: 80%;") %>
+          </div>
+
+
+          <%= f.submit("Pubblica", :class=>"btn btn-primary") %>
+
+        <% end %>
+
+  
+      </div>
+    </div>
+
+  </div>
+
+<br><br><br>
+
+</div>
+
 
 
 <% else %>
-<h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<h1 class="ban-msg">Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
 <% end %>

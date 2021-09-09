@@ -1,38 +1,61 @@
 <!--- <h2>Modifica <%= resource_name.to_s.humanize %></h2> --->
-<h2>Modifica profilo</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<% if current_user.is_admin? || current_user.is_gymClient? %>
 
-  <div class="field">
-    <%= f.label :nome %><br />
-    <%= f.text_field :nome, autofocus: true, autocomplete: "nome" %>
+<div class="container-fluid">
+
+  <br>
+
+  <div class="profile-info">
+
+    <div class="card text-center center" style="max-width: 80%;">
+      <div class="card-header text-bold" style="font-size: xx-large;">
+        Modifica profilo <%= @user.email %>
+      </div>
+      <div class="card-body">
+        <!-- <h5 class="card-title text-bold">Email: <%= @user.email %></h5> -->
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <div class="mb-3">
+            <%= f.label(:nome, :class=>"form-label") %><br />
+            <%= f.text_field(:nome, autofocus: true, autocomplete: "Nome", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:cognome, :class=>"form-label") %><br />
+            <%= f.text_field(:cognome, autofocus: true, autocomplete: "Cognome", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:cellulare, :class=>"form-label") %><br />
+            <%= f.text_field(:cellulare, autofocus: true, autocomplete: "Cellulare", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:eta, "Età", :class=>"form-label") %><br />
+            <%= f.text_field(:eta, autofocus: true, autocomplete: "Età", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <%= f.submit("Salva modifiche", :class=>"btn btn-primary") %>
+          <%= link_to("Indietro", :back, :class=>"btn btn-secondary") %>
+
+        <% end %>
+
+  
+      </div>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= f.label :cognome %><br />
-    <%= f.text_field :cognome, autofocus: true, autocomplete: "cognome" %>
-  </div>
+</div>
 
-  <div class="field">
-    <%= f.label :cellulare %><br />
-    <%= f.text_field :cellulare, autofocus: true, autocomplete: "cellulare" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :eta %><br />
-    <%= f.text_field :eta, autofocus: true, autocomplete: "eta" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Aggiorna profilo" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Insoddisfatto? <%= button_to "Cancella profilo", registration_path(resource_name), data: { confirm: "Sei sicuro?" }, method: :delete %></p>
-
-<%= link_to "Indietro", :back %>
 <br><br>
+
+
+<% else %>
+<h1 class="ban-msg">Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<% end %>
 

@@ -1,37 +1,68 @@
-<% if current_user.is_admin? || current_user.is_gymClient? %>
+<% if current_user.is_admin? %>
 
-<h1>Aggiungi un nuovo corso</h1>
 
-<%= form_with model: @course do |form| %>
-  <div>
-    <%= form.label :nome %><br>
-    <%= form.text_field :nome %>
+<div class="container-fluid">
+
+  <br>
+
+  <div class="course-form">
+
+    <div class="card text-center center" style="max-width: 80%;">
+      <div class="card-header text-bold" style="font-size: xx-large;">
+        Aggiungi corso
+      </div>
+      <div class="card-body">
+
+        <%= form_with model: @course do |f| %>
+
+          <div class="mb-3">
+            <%= f.label(:nome, :class=>"form-label") %><br />
+            <%= f.text_field(:nome, autofocus: true, autocomplete: "Nome", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:giorno, :class=>"form-label") %><br />
+            <%= f.text_field(:giorno, autofocus: true, autocomplete: "Giorno", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:orario, :class=>"form-label") %><br />
+            <%= f.text_field(:orario, autofocus: true, autocomplete: "Orario", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:durata, :class=>"form-label") %><br />
+            <%= f.text_field(:durata, autofocus: true, autocomplete: "Durata", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:descrizione, :class=>"form-label") %><br />
+            <%= f.text_area(:descrizione, autofocus: true, autocomplete: "Descrizione", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <%= f.submit("Crea corso", :class=>"btn btn-primary") %>
+          <%= link_to("Indietro", :back, :class=>"btn btn-secondary") %>
+
+        <% end %>
+
+  
+      </div>
+    </div>
+
   </div>
 
-  <div>
-    <%= form.label :giorno %><br>
-    <%= form.text_field :giorno %>
-  </div>
+</div>
 
-  <div>
-    <%= form.label :orario %><br>
-    <%= form.text_field :orario %>
-  </div>
+<br><br><br>
 
-  <div>
-    <%= form.label :durata %><br>
-    <%= form.text_field :durata %>
-  </div>
-
-  <div>
-    <%= form.label :descrizione %><br>
-    <%= form.text_area :descrizione %>
-  </div>
-
-  <div>
-    <%= form.submit "Crea corso" %>
-  </div>
 <% end %>
-<% else %>
-<h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+
+
+<% if current_user.is_gymClient? and current_user.is_admin? == false %>
+<h1 class="ban-msg">Non hai i permessi per visualizzare questa pagina</h1>
+<%= link_to("Indietro", :back, :class=>"btn btn-secondary") %>
+<% end %>
+
+<% if current_user.is_banned? %>
+<h1 class="ban-msg">Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
 <% end %>

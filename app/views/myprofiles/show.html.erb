@@ -1,14 +1,36 @@
 <% if current_user.is_admin? || current_user.is_gymClient? %>
 
-<h1> Il mio profilo </h1>
-<p> <b>Email:</b> <%= @user.email %> </p>
-<p> <b>Nome:</b> <%= @user.nome %> </p>
-<p> <b>Cognome:</b> <%= @user.cognome %> </p>
-<p> <b>Cellulare:</b> <%= @user.cellulare %> </p>
-<p> <b>Età:</b> <%= @user.eta %> </p>
-<li><%= link_to 'Modifica profilo', edit_user_registration_path %></li>
-<li><%= link_to "Torna ai corsi", courses_path %></li>
-<br><br>
+<div class="container-fluid">
+
+	<br>
+
+	<div class="profile-info">
+
+		<div class="card text-center center" style="max-width: 80%;">
+		  <div class="card-header text-bold" style="font-size: xx-large;">
+		    Info profilo
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title text-bold">Email: <%= @user.email %></h5>
+		    <h5 class="card-text">Nome: <%= @user.nome %></h5>
+		    <h5 class="card-text">Cognome: <%= @user.cognome %></h5>
+		    <h5 class="card-text">Cellulare: <%= @user.cellulare %></h5>
+		    <h5 class="card-text">Età: <%= @user.eta %></h5>
+		    <a href="<%= edit_user_registration_path %>" class="btn btn-primary">Modifica profilo</a>
+		    <%= link_to("Cancella profilo", registration_path(current_user), data: { confirm: "Vuoi davvero cancellare il tuo profilo?" }, method: :delete, :class=>"btn btn-danger") %>
+		  </div>
+		</div>
+
+	</div>
+
+</div>
+
+
+
+<br><br><br>
+
+
+
 
 <% else %>
 <h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>

@@ -1,7 +1,7 @@
 # OlympusGym
 
 
-![Git-Banner](/app/assets/images/banner.png)
+![Git-Banner](/app/assets/images/banner-alpha.png)
 
 
 *Sito web per la gestione e l'iscrizione ai corsi offerti dalla palestra OlympusGym.*
@@ -27,7 +27,7 @@
 
 ## Per lanciare l'applicazione in locale:
 
-1. `$ rails s`
+1. `$ rails server`
 2. Visitare `http://localhost:3000`
 
 

@@ -1,9 +1,7 @@
- <style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
+
 <% if current_user.is_admin? %>
+
+
   <table>
    <tr>
   <th> Email </th>
@@ -35,15 +33,15 @@ table, th, td {
       	</td>
 
     </tr>
-  <% end %>
-
   </table>
+
+<% end %>
+
+  
+
+
+
 <% else %>
 <h1>Questa pagina è riservata agli amministratori della OlympusGym</h1> 
 <% end %>
 
-<ul>
-<li>
-	<%= link_to "Torna ai corsi", courses_path %>
-</li>
-</ul>

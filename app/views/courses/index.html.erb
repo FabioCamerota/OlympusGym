@@ -9,7 +9,10 @@ table, th, td {
   <br>
 
   <div class="courses-table container-fluid">
-    <h1 class="text-bold" style="margin-left: 5%;">I nostri corsi</h1>
+    <h1 class="text-bold" style="margin-left: 5%; display: inline">I nostri corsi</h1>
+    <% if can? :create, Course %>
+      <a href="/courses/new" class="btn btn-primary" style="display: inline; position: relative; bottom: 8px; left: 15px">Aggiungi corso</a>
+    <% end %>
     <table style="width:90%" class="table table-hover table-secondary center">
     <thead class="table-dark">
       <th>Nome</th>
@@ -38,7 +41,7 @@ table, th, td {
 
             <% if can? :destroy, Course %>
             <div class="col-3">
-        		  <td class="courses-column"><%= link_to("Elimina corso", course_path(course.id), :class => "btn btn-secondary courses-button", method: :delete,
+        		  <td class="courses-column"><%= link_to("Elimina corso", course_path(course.id), :class => "btn btn-danger courses-button", method: :delete,
                            data: { confirm: "Sei sicuro di voler eliminare il corso di "+course.nome+"?" }) %></td>
             </div>
             <% end %>
@@ -47,7 +50,7 @@ table, th, td {
             <% if Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).exists?%>
                   <% reservation = Reservation.where(:user_id => current_user.id, :course_id => course.id, :prenotato => 1).first %>
                   <div class="col-3">
-                  <td  class="courses-column"><%= link_to("Cancella prenotazione", [reservation.course, reservation], :class => "btn btn-primary courses-button",method: :delete,
+                  <td  class="courses-column"><%= link_to("Cancella prenotazione", [reservation.course, reservation], :class => "btn btn-secondary courses-button",method: :delete,
                             data: { confirm: "Vuoi cancellare la tua prenotazione al corso di "+course.nome+"?" })  %></td>
                   </div>
             <% else %>
@@ -69,23 +72,24 @@ table, th, td {
    
   </table> 
 </div>
-<hr>
 
-<div class="footer" style="margin-left: 5%;">
 
-  <h2 class="text-bold"> Azioni </h2>
+<br><br><br>
 
-  <ul class="actions container-fluid">
-  <% if can? :create, Course %>
-    <li><%= link_to "Crea nuovo corso", new_course_path %></li>
-  <% end %> 
-  <li><%= link_to "Vedi comunicazioni", comunications_path %></li>
 
-  <li><%= link_to "Mostra tutte le mie prenotazioni", myreservations_index_path %></li>
-  <li><%= link_to 'Il mio Profilo', myprofiles_show_path(current_user.id) %></li>
-  </ul>
-</div>
+<% if user_signed_in? and current_user.nome != nil and current_user.nome != "" %>
+  <h3 class="greeting">
+    Benvenuto <%= current_user.nome %>
+  </h3>
+<% end %> 
+<% if user_signed_in? and (current_user.nome == nil or current_user.nome == "") %>
+  <h3 class="greeting">
+    Benvenuto <%= current_user.email %> <%= link_to("Aggiorna il tuo profilo", edit_user_registration_path, :class=>"btn btn-primary") %>
+  </h3>
+<% end %>
+
+
 
 <% else %>
-  <h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+  <h1 class="ban-msg">Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
 <% end %>

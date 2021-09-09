@@ -1,44 +1,42 @@
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>
-
 <% if current_user.is_admin? || current_user.is_gymClient? %>
 
-<h1>Comunicazioni:</h1>
+<br>
+
+<h1 class="text-bold" style="margin-left: 5%; display: inline;">Comunicazioni</h1>
+<% if can? :create, Comunication %>
+<%= link_to("Crea comunicazione", new_comunication_path, :class=>"btn btn-primary", :style=>"display: inline; position: relative; bottom: 8px; left: 15px; ") %>
+<% end %>
+
+  <div class="comunications-table container-fluid">
+   <table style="width:90%" class="table table-hover table-secondary center">
+    <tr>
+      <thead class="table-dark">
+        <th>Descrizione</th>        
+        <% if can? :destroy, Comunication %>
+        <th>Azioni</th>
+        <% end %>
+      </thead>
+      
+    </tr>
+
+    <% @comunications.reverse.each do |comunication| %>
+    <tr>
+      <td><%= comunication.description %></td>
+      <% if can? :destroy, Comunication %>
+  		  <td style="width:25%;"><%= link_to("Elimina comunicazione", comunication_path(comunication.id), method: :delete,
+                     data: { confirm: "Vuoi eliminare questa comunicazione?" }, :class=>"btn btn-danger") %></td>
+      <% end %>
+    </tr>
+    <% end %> 
+   
+   </table> 
+  </div>
 
 
- <table style="width:100%">
-  <tr>
-    <th>Descrizione</th>
-    <% if can? :destroy, Comunication %>
-      <th>Azioni</th>
-    <% end %>
-  </tr>
+<br><br><br>
 
-  <% @comunications.each do |comunication| %>
-  <tr>
-    <td><%= comunication.description %></td>
-    <% if can? :destroy, Comunication %>
-		  <td><%= link_to "Elimina comunicazione", comunication_path(comunication.id), method: :delete,
-                   data: { confirm: "Sei sicuro?" } %></td>
-    <% end %>
-  </tr>
-  <% end %> 
- 
-</table> 
 
-<hr>
 
-<!--- <h2> Azioni </h2> --->
-
-<ul>
-  <% if can? :create, Comunication %>
-  <li><%= link_to "Crea nuova comunicazione", new_comunication_path %></li>
-  <% end %>
-  <li><%= link_to "Torna ai corsi", courses_path %></li>
-</ul>
 <% else %>
-  <h1>Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+  <h1 class="ban-msg">Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
 <% end %>
