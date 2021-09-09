@@ -1,9 +1,9 @@
 <%- if controller_name != 'sessions' %>
-  <%= link_to "Log in", new_session_path(resource_name) %><br />
+  <%= link_to("Log in", new_session_path(resource_name), :class=>"btn btn-primary", :style=>"") %><br />
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Registrati", new_registration_path(resource_name) %><br />
+  <%= link_to("Registrati", new_registration_path(resource_name), :class=>"btn btn-success") %><br />
 <% end %>
 
 <!-- <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
@@ -20,8 +20,15 @@
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Accedi con Google", omniauth_authorize_path(resource_name, provider), method: :post %><br />
+    <%= link_to("Accedi con Google", omniauth_authorize_path(resource_name, provider), method: :post, :class=>"btn btn-outline-dark", 
+      :role=>"button", :style=>"text-transform:none; ") %><br />
   <% end %>
 <% end %>
 
+
+<!-- img_tag(:width=>"20px", :style=>"margin-bottom:3px; margin-right:5px;", 
+        :alt=>"Google sign-in", :src=>'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_"G"_Logo.svg') -->
+
+<!-- role="button" style="text-transform:none">
+      <img width="20px" style="margin-bottom:3px; margin-right:5px" alt="Google sign-in" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" /> -->
 <!-- #{OmniAuth::Utils.camelize(provider)}-->
