@@ -13,3 +13,65 @@
  *= require_tree .
  *= require_self
  */
+
+.text-bold {
+    font-weight: bolder;
+}
+.text-white {
+    color: white;
+}
+
+.logo-name {
+    font-weight: 900;
+    font-size: 300px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.courses-column {
+    min-width: 25%;
+    max-width: 50%;
+}
+.users-column {
+    min-width: 25%;
+    max-width: 50%;
+}
+
+.navbar {
+    max-width: 44%;
+}
+#navbarDropdown {
+    color: #0275d8;
+}
+.dropdown-menu .dropdown-item {
+    color: #0275d8;
+}
+
+.notification, .greeting {
+    margin-left: 5%;
+}
+
+.ban-msg {
+    padding-top: 2rem;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.ban-btn {
+    text-align: center;
+    align-content: center;
+}
+
+
+
+nav a {
+    font-size: 1.4em !important;
+}
+
+body {
+    background-color: #f7f7f7;
+}

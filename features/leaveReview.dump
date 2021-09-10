@@ -1,0 +1,12 @@
+Feature: Users can leave courses reviews
+Scenario: User leaves a review for Krav Maga course
+	Given I am authenticated as User
+	Given I am on OlympusGym homepage
+	Then I should see "Krav Maga"
+	Then I follow "Dettagli"
+	And I should be on the Course Details Page
+	Then I fill in "Commento" with "Commento di prova"
+	And I press "Pubblica"
+	Then I should be on the Course Details Page
+	And I should see "Commento di prova"
+	And I should see "Autore: Utente"

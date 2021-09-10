@@ -1,0 +1,73 @@
+
+
+<div class="container-fluid">
+  <div class="card text-center center" style="max-width: 80%;">
+    <div class="card-header text-bold" style="font-size: xx-large;">
+      Registrati
+    </div>
+    <div class="card-body">
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="mb-3">
+          <%= f.text_field(:nome, :placeholder=>"Nome",autofocus: true, autocomplete: "Nome", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          <br />
+        </div>
+
+        <div class="mb-3">
+          <%= f.text_field(:cognome, :placeholder=>"Cognome", autofocus: true, autocomplete: "Cognome", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          <br />
+        </div>
+
+        <div class="mb-3">
+          <%= f.email_field(:email, :placeholder=>"Email*", autofocus: true, autocomplete: "Email", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          <br />
+        </div>
+
+        <div class="mb-3">
+          <%= f.text_field(:cellulare, :placeholder=>"Cellulare", autofocus: true, autocomplete: "Cellulare", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          <br />
+        </div>
+
+        <div class="mb-3">
+          <%= f.text_field(:eta, :placeholder=>"Età", autofocus: true, autocomplete: "Età", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+           <br />
+        </div>
+
+        <div class="mb-3">
+          <%= f.password_field(:password, :placeholder=>"Password*", autofocus: true, autocomplete: "Età", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+           <% if @minimum_password_length %>
+            <em>(La password deve contenere almeno <%= @minimum_password_length %> caratteri)</em>
+            <% end %> <br />
+        </div>
+
+        <div class="mb-3">
+          <%= f.password_field(:password_confirmation, :placeholder=>"Conferma password*", autofocus: true, autocomplete: "Età", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+        </div>
+
+        <%= f.submit("Conferma", :class=>"btn btn-success") %>
+
+        <br><br><br>
+
+        <%- if controller_name != 'sessions' %>
+          <%= link_to("Torna al login", new_session_path(resource_name), :class=>"btn btn-primary", :style=>"display:inline;") %><br />
+        <% end %>
+
+        <br>
+
+        <%- if devise_mapping.omniauthable? %>
+          <%- resource_class.omniauth_providers.each do |provider| %>
+          <%= link_to("Accedi con Google", omniauth_authorize_path(resource_name, provider), method: :post, :class=>"btn btn-outline-dark", 
+            :role=>"button", :style=>"text-transform:none; display:inline; ") %><br />
+          <% end %>
+        <% end %>
+
+        
+
+      <% end %>
+
+    </div>
+  </div>
+</div>
+

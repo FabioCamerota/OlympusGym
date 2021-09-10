@@ -1,0 +1,38 @@
+<% if current_user.is_admin? || current_user.is_gymClient? %>
+
+<br>
+
+<h1 class="text-bold" style="margin-left: 5%; display: inline;">Corsi a cui sei prenotato</h1>
+<br><br>
+
+
+ <table style="width:90%" class="table table-hover table-secondary center">
+  <tr>
+    <thead class="table-dark">
+      <th>Nome</th>
+      <th>Giorno</th>
+      <th>Orario</th>
+      <th>Durata</th>
+      <th style="max-width: 50%; width: 50%;">Descrizione</th>
+    </thead>
+  </tr>
+
+  <% @courses.each do |course| %>
+  <tr>
+    <td><%= course.nome %></td>
+    <td><%= course.giorno %></td>
+    <td><%= course.orario %></td>
+    <td><%= course.durata %></td>
+    <td><%= course.descrizione %></td>
+  </tr>
+  <% end %> 
+ 
+</table>
+
+
+<br><br><br>
+
+
+<% else %>
+<h1 class="ban-msg">Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<% end %>

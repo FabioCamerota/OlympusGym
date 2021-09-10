@@ -1,0 +1,20 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+krav_maga:
+ id: 0
+ nome: 'Krav Maga'
+ giorno: '01/01/1970'
+ orario: '12:00'
+ durata: '1:30'
+ descrizione: 'Corso di difesa personale'
+ #created_at:
+ #updated_at:
+
+# column: value
+#
+#two: {}
+# column: value

@@ -1,0 +1,63 @@
+
+<% if current_user.is_admin? %>
+
+<br>
+
+<div class="admin-table container-fluid">
+  <h1 class="text-bold" style="margin-left: 10%;">Tutti gli utenti</h1>
+  <br>
+
+  <table style="width:80%" class="table table-hover table-secondary center">
+  <thead class="table-dark">
+    <th>Email</th>
+    <th>User?</th>
+    <th>Admin?</th>
+    <th>Azioni</th>
+  </thead>
+
+  <% @users.each do |user| %>
+  <tr class="">
+    <td><%= user.email %></td>
+    <td><%= user.is_gymClient? %></td>
+    <td><%= user.is_admin? %></td>
+    <td><table style="width:100%">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+      
+          <div class="col-3">
+            <% if user.is_banned? %>
+            <td class="users-column"><%= link_to("Rimuovi Ban", admin_unban_user_path(user.id), method: :get, data: { confirm: "Vuoi rimuovere il ban a #{user.email}?" }, :class=>"btn btn-secondary") %></td>
+            <% else %>
+            <td class="users-column"><%= link_to("Ban", admin_ban_user_path(user.id), method: :get, data: { confirm: "Vuoi bannare #{user.email}?" }, :class=>"btn btn-danger") %></td>
+            <% end %>
+          </div>
+          
+  
+          <div class="col-3">
+            <% if user.is_admin? %>
+            <td class="users-column"><%= link_to("Rimuovi Admin", admin_unadmin_user_path(user.id), method: :get, data: { confirm: "Vuoi rimuovere i privilegi da admin a #{user.email}?" }, :class=>"btn btn-secondary") %></td>
+            <% else %>
+            <td class="users-column"><%= link_to("Rendi Admin", admin_admin_user_path(user.id), method: :get, data: { confirm: "Vuoi rendere #{user.email} un admin?" }, :class=>"btn btn-primary") %></td>
+            <% end %>
+          </div>
+          
+        
+         </div>
+        </div>
+      </table>
+    </td>
+  </tr>
+  <% end %> 
+   
+  </table> 
+</div>
+
+
+<br><br><br>
+
+
+
+<% else %>
+<h1 class="ban-msg">Questa pagina è riservata agli amministratori della OlympusGym</h1> 
+<% end %>
+

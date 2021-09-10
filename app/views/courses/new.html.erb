@@ -1,0 +1,70 @@
+<% if current_user.is_admin? %>
+
+
+<div class="container-fluid">
+
+  <br>
+
+  <div class="course-form">
+
+    <div class="card text-center center" style="max-width: 80%;">
+      <div class="card-header text-bold" style="font-size: xx-large;">
+        Aggiungi corso
+      </div>
+      <div class="card-body">
+
+        <%= form_with model: @course do |f| %>
+
+          <div class="mb-3">
+            <%= f.label(:nome, :class=>"form-label") %><br />
+            <%= f.text_field(:nome, autofocus: true, autocomplete: "Nome", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:giorno, :class=>"form-label") %><br />
+            <%= f.text_field(:giorno, autofocus: true, autocomplete: "Giorno", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:orario, :class=>"form-label") %><br />
+            <%= f.text_field(:orario, autofocus: true, autocomplete: "Orario", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:durata, :class=>"form-label") %><br />
+            <%= f.text_field(:durata, autofocus: true, autocomplete: "Durata", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label(:descrizione, :class=>"form-label") %><br />
+            <%= f.text_area(:descrizione, autofocus: true, autocomplete: "Descrizione", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          </div>
+
+          <%= f.submit("Crea corso", :class=>"btn btn-primary") %>
+          <%= link_to("Indietro", :back, :class=>"btn btn-secondary") %>
+
+        <% end %>
+
+  
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<br><br><br>
+
+<% end %>
+
+
+<% if current_user.is_gymClient? and current_user.is_admin? == false %>
+<h1 class="ban-msg">Non hai i permessi per visualizzare questa pagina</h1>
+<div class="ban-btn">
+  <%= link_to("Indietro", :back, :class=>"btn btn-secondary ban-btn") %>
+</div>
+<% end %>
+
+<% if current_user.is_banned? %>
+<h1 class="ban-msg">Il tuo account è stato bannato dagli amministratori di OlympusGym</h1>
+<% end %>

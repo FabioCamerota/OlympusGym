@@ -1,0 +1,9 @@
+.main-banner {
+	color: orangered;
+	font-weight: bolder;
+	font-size: xx-large;
+	border: solid;
+	border-width: 2px;
+	border-radius: 10px;
+	text-align: center;
+}
