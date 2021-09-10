@@ -21,7 +21,7 @@
         </div>
 
         <div class="mb-3">
-          <%= f.email_field(:email, :placeholder=>"Email", autofocus: true, autocomplete: "Email", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          <%= f.email_field(:email, :placeholder=>"Email*", autofocus: true, autocomplete: "Email", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
           <br />
         </div>
 
@@ -36,22 +36,22 @@
         </div>
 
         <div class="mb-3">
-          <%= f.password_field(:password, :placeholder=>"Password", autofocus: true, autocomplete: "Età", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          <%= f.password_field(:password, :placeholder=>"Password*", autofocus: true, autocomplete: "Età", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
            <% if @minimum_password_length %>
             <em>(La password deve contenere almeno <%= @minimum_password_length %> caratteri)</em>
             <% end %> <br />
         </div>
 
         <div class="mb-3">
-          <%= f.password_field(:password_confirmation, :placeholder=>"Conferma password", autofocus: true, autocomplete: "Età", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
+          <%= f.password_field(:password_confirmation, :placeholder=>"Conferma password*", autofocus: true, autocomplete: "Età", :class=>"form-control center", :style=>"width: 18rem; max-width: 50%;") %>
         </div>
 
         <%= f.submit("Conferma", :class=>"btn btn-success") %>
 
-        <br><br><br><br>
+        <br><br><br>
 
         <%- if controller_name != 'sessions' %>
-          <%= link_to("Log in", new_session_path(resource_name), :class=>"btn btn-primary", :style=>"display:inline;") %><br />
+          <%= link_to("Torna al login", new_session_path(resource_name), :class=>"btn btn-primary", :style=>"display:inline;") %><br />
         <% end %>
 
         <br>

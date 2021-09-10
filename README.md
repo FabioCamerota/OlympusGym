@@ -1,7 +1,5 @@
-# OlympusGym
 
-
-![Git-Banner](/app/assets/images/banner-alpha.png)
+![Git-Banner](/app/assets/images/banner.png)
 
 
 *Sito web per la gestione e l'iscrizione ai corsi offerti dalla palestra OlympusGym.*

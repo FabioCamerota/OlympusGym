@@ -13,6 +13,7 @@ table, th, td {
     <% if can? :create, Course %>
       <a href="/courses/new" class="btn btn-primary" style="display: inline; position: relative; bottom: 8px; left: 15px">Aggiungi corso</a>
     <% end %>
+    <br><br>
     <table style="width:90%" class="table table-hover table-secondary center">
     <thead class="table-dark">
       <th>Nome</th>
@@ -84,7 +85,7 @@ table, th, td {
 <% end %> 
 <% if user_signed_in? and (current_user.nome == nil or current_user.nome == "") %>
   <h3 class="greeting">
-    Benvenuto <%= current_user.email %> <%= link_to("Aggiorna il tuo profilo", edit_user_registration_path, :class=>"btn btn-primary") %>
+    Benvenuto <%= current_user.email %> <%= link_to("Completa il tuo profilo", edit_user_registration_path, :class=>"btn btn-primary") %>
   </h3>
 <% end %>
 
