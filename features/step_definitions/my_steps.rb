@@ -7,8 +7,9 @@ Given('I am authenticated as User') do
 
     #AGGIUNGERE I FUTURI CAMPI DEL SIGN IN
 
-    click_button "Log in"
-    expect(page).to have_text("Logged in as test_user@olympus.com")
+    click_button "Login"
+    expect(page).to have_content("I nostri corsi")
+    expect(page).to have_content("Benvenuto Utente")
 end
 
 Given('I am authenticated as Admin') do
@@ -18,10 +19,9 @@ Given('I am authenticated as Admin') do
     fill_in "Email", with: "test_admin@olympus.com"
     fill_in "Password", with: "test_password"
 
-    #AGGIUNGERE I FUTURI CAMPI DEL SIGN IN
-
-    click_button "Log in"
-    expect(page).to have_text("Logged in as test_admin@olympus.com")
+    click_button "Login"
+    expect(page).to have_content("I nostri corsi")
+    expect(page).to have_content("Benvenuto Amministratore")
 end
 
 Given('I am authenticated as a Banned User') do
@@ -31,10 +31,8 @@ Given('I am authenticated as a Banned User') do
     fill_in "Email", with: "test_banned@olympus.com"
     fill_in "Password", with: "test_password"
 
-    #AGGIUNGERE I FUTURI CAMPI DEL SIGN IN
-
-    click_button "Log in"
-    expect(page).to have_text("Logged in as test_banned@olympus.com")
+    click_button "Login"
+    expect(page).to have_content("Il tuo account è stato bannato dagli amministratori di OlympusGym")
 end
 
 Given('I am on OlympusGym homepage') do

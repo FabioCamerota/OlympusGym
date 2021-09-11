@@ -88,7 +88,7 @@ table, th, td {
 <% end %> 
 <% if user_signed_in? and (current_user.nome == nil or current_user.nome == "") %>
   <h3 class="greeting">
-    Benvenuto <%= current_user.email %> <%= link_to("Aggiorna il tuo profilo", edit_user_registration_path, :class=>"btn btn-primary") %>
+    Benvenuto <%= current_user.email %> <%= link_to("Completa il tuo profilo", edit_user_registration_path, :class=>"btn btn-primary") %>
   </h3>
 <% end %>
 

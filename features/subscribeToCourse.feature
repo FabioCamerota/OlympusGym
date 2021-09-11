@@ -6,10 +6,10 @@ Scenario: Subscribe to a course and then unsubscribe
     When I follow "Prenotami"
     Then I should be on the OlympusGym homepage
     And I should see "Cancella prenotazione"
-    Then I follow "Mostra tutte le mie prenotazioni"
+    Then I follow "Prenotazioni"
     And I should be on the Reservations Page
     And I should see "Krav Maga"
-    Then I follow "Torna ai corsi"
+    Then I follow "Corsi"
     And I should be on the OlympusGym homepage
     Then I follow "Cancella prenotazione"
     Then I should be on the OlympusGym homepage

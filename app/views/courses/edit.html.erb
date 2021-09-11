@@ -59,7 +59,9 @@
 
 <% if current_user.is_gymClient? and current_user.is_admin? == false %>
 <h1 class="ban-msg">Non hai i permessi per visualizzare questa pagina</h1>
-<%= link_to("Indietro", :back, :class=>"btn btn-secondary") %>
+<div class="ban-btn">
+  <%= link_to("Indietro", :back, :class=>"btn btn-secondary ban-btn") %>
+</div>
 <% end %>
 
 
