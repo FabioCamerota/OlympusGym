@@ -13,7 +13,10 @@ table, th, td {
     <% if can? :create, Course %>
       <a href="/courses/new" class="btn btn-primary" style="display: inline; position: relative; bottom: 8px; left: 15px">Aggiungi corso</a>
     <% end %>
-    <br><br>
+    <% if can? :seeAll, Reservation %>
+      <a href="/allreservations/index" class="btn btn-primary" style="display: inline; position: relative; bottom: 8px; left: 15px">Vedi lista prenotazioni</a>
+    <% end %>
+    
     <table style="width:90%" class="table table-hover table-secondary center">
     <thead class="table-dark">
       <th>Nome</th>
