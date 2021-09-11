@@ -23,7 +23,7 @@
 
 .logo-name {
     font-weight: 900;
-    font-size: 300px;
+    /*font-size: 300px;*/
 }
 
 .center {
@@ -41,13 +41,23 @@
 }
 
 .navbar {
-    max-width: 44%;
+    
+    }
+.navbar-inner-container{
+    
+}
+.navbar-outer-container {
+    display: inline-block;
 }
 #navbarDropdown {
     color: #0275d8;
 }
 .dropdown-menu .dropdown-item {
     color: #0275d8;
+}
+
+.navbar-wrapper {
+    /*text-align: center;*/
 }
 
 .notification, .greeting {

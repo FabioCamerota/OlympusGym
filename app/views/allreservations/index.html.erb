@@ -2,17 +2,18 @@
 
 <br>
 
-<h1 class="text-bold" style="margin-left: 5%; display: inline;">Lista di tutte le prenotazioni di tutti gli utenti</h1>
+<h1 class="text-bold" style="margin-left: 10%; display: inline;">Tutte le prenotazioni</h1>
+<a href="/adm" class="btn btn-primary" style="display: inline; position: relative; bottom: 8px; left: 15px">Lista utenti</a>
+<br><br>
 
-
- <table style="width:90%" class="table table-hover table-secondary center">
+ <table style="width:80%" class="table table-hover table-secondary center">
   <tr>
     <thead class="table-dark">
       <th>Email utente</th>
-      <th>Nome</th>
+      <th>Corso</th>
       <th>Giorno</th>
       <th>Orario</th>
-      <th>Elimina</th>
+      <th>Azioni</th>
     </thead>
   </tr>
 
@@ -23,7 +24,7 @@
     <td><%= @courses[i].giorno %></td>
     <td><%= @courses[i].orario %></td>
     <td style="width:25%;"><%= link_to("Elimina prenotazione", [@reservations[i].course, @reservations[i]], method: :delete,
-                     data: { confirm: "Vuoi eliminare la prenotazione dell'utente "+@users[i].email+"?" }, :class=>"btn btn-danger") %></td>
+                     data: { confirm: "Vuoi eliminare la prenotazione a #{@courses[i].nome} di #{@users[i].email}?" }, :class=>"btn btn-danger") %></td>
   </tr>
   <% end %> 
  
@@ -34,5 +35,5 @@
 
 
 <% else %>
-<h1 class="ban-msg">Non sei autorizzato, perchè non sei un admin</h1>
+<h1 class="ban-msg">Questa pagina è riservata agli amministratori della OlympusGym</h1>
 <% end %>
