@@ -5,4 +5,6 @@ Canard::Abilities.for(:admin) do
 
   can [:create, :update, :destroy], Comunication
   
+  can [:seeAll, :destroyAll], Reservation
+
 end

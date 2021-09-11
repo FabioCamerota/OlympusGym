@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'myreservations/index'
+  get 'allreservations/index'
   get 'myprofiles/:id', to: 'myprofiles#show', :via => :get, :as => :myprofiles_show
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' , registrations:
     "users/registrations"}
@@ -8,7 +9,7 @@ Rails.application.routes.draw do
   root "courses#index"
   resources :courses do
     resources :reviews
-    #secondo me è buono mettere only
+    #only
     resources :reservations
   end
   resources :comunications
